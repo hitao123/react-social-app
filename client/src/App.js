@@ -1,5 +1,5 @@
-import Login from "./pages/login/Login";
-import Register from "./pages/register/Register";
+import { useContext } from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   createBrowserRouter,
   RouterProvider,
@@ -11,18 +11,18 @@ import LeftBar from "./components/leftBar/LeftBar";
 import RightBar from "./components/rightBar/RightBar";
 import Home from "./pages/home/Home";
 import Profile from "./pages/profile/Profile";
+import Login from "./pages/login/Login";
+import Register from "./pages/register/Register";
+import Setting from './pages/setting/Setting';
 import "./style.scss";
 import 'react-toastify/dist/ReactToastify.css';
-import { useContext } from "react";
+
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/authContext";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
   const { currentUser } = useContext(AuthContext);
-
   const { darkMode } = useContext(DarkModeContext);
-
   const queryClient = new QueryClient();
 
   const Layout = () => {
@@ -77,6 +77,10 @@ function App() {
       path: "/register",
       element: <Register />,
     },
+    {
+      path: "/setting",
+      element: <Setting />,
+    }
   ]);
 
   return (

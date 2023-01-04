@@ -64,6 +64,7 @@
         align-items: center;
         gap: 10px;
         font-weight: 500;
+        cursor: pointer;
 
         @include tablet{
           display: none;

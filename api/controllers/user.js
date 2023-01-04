@@ -1,5 +1,6 @@
 import { db } from "../connect.js";
 import jwt from "jsonwebtoken";
+import { responseSuccess } from "../utils/response.js"
 
 export const getUser = (req, res) => {
   const userId = req.params.userId;
@@ -8,7 +9,9 @@ export const getUser = (req, res) => {
   db.query(q, [userId], (err, data) => {
     if (err) return res.status(500).json(err);
     const { password, ...info } = data[0];
-    return res.json(info);
+    info.profilePic = 'http://localhost:8800/' + info.profilePic 
+    info.coverPic = 'http://localhost:8800/' + info.coverPic 
+    return res.json(responseSuccess(info, 200, ''));
   });
 };
 

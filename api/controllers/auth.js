@@ -51,7 +51,8 @@ export const login = (req, res) => {
     const token = jwt.sign({ id: data[0].id }, "secretkey");
 
     const { password, ...others } = data[0];
-
+    others.profilePic = 'http://localhost:8800/' + others.profilePic
+    others.coverPic = 'http://localhost:8800/' + others.coverPic 
     res
       .cookie("accessToken", token, {
         httpOnly: true,
