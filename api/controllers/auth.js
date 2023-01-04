@@ -1,6 +1,7 @@
 import { db } from "../connect.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { responseSuccess } from '../utils/response.js';
 
 export const register = (req, res) => {
   //CHECK USER IF EXISTS
@@ -9,7 +10,7 @@ export const register = (req, res) => {
 
   db.query(q, [req.body.username], (err, data) => {
     if (err) return res.status(500).json(err);
-    if (data.length) return res.status(409).json("User already exists!");
+    if (data.length) return res.json(responseSuccess('', 409, "User already exists!"));
     //CREATE A NEW USER
     //Hash the password
     const salt = bcrypt.genSaltSync(10);
@@ -27,7 +28,7 @@ export const register = (req, res) => {
 
     db.query(q, [values], (err, data) => {
       if (err) return res.status(500).json(err);
-      return res.status(200).json("User has been created.");
+      return res.json(responseSuccess('', 200, 'success'));
     });
   });
 };

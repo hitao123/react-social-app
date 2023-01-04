@@ -22,7 +22,7 @@ const Register = () => {
     try {
       await axios.post("http://localhost:8800/api/auth/register", inputs);
     } catch (err) {
-      setErr(err.response.data);
+      setErr(err);
     }
   };
 
@@ -40,7 +40,7 @@ const Register = () => {
           </p>
           <span>Do you have an account?</span>
           <Link to="/login">
-            <button>Login</button>
+            <button>登录</button>
           </Link>
         </div>
         <div className="right">
@@ -48,30 +48,30 @@ const Register = () => {
           <form>
             <input
               type="text"
-              placeholder="Username"
+              placeholder="用户名"
               name="username"
               onChange={handleChange}
             />
             <input
               type="email"
-              placeholder="Email"
+              placeholder="邮箱"
               name="email"
               onChange={handleChange}
             />
             <input
               type="password"
-              placeholder="Password"
+              placeholder="密码"
               name="password"
               onChange={handleChange}
             />
             <input
               type="text"
-              placeholder="Name"
+              placeholder="姓名"
               name="name"
               onChange={handleChange}
             />
             {err && err}
-            <button onClick={handleClick}>Register</button>
+            <button onClick={handleClick}>注册</button>
           </form>
         </div>
       </div>

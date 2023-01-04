@@ -4,11 +4,11 @@ import { AuthContext } from "../../context/authContext";
 import { useQuery } from "@tanstack/react-query";
 import { makeRequest } from "../../axios";
 
-const Stories = () => {
+const Stories = ({ userId }) => {
   const { currentUser } = useContext(AuthContext);
 
   const { isLoading, error, data } = useQuery(["stories"], () =>
-    makeRequest.get("/stories").then((res) => {
+    makeRequest.get("/stories?userId="+userId).then((res) => {
       return res.data;
     })
   );

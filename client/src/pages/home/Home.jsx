@@ -6,9 +6,9 @@ import "./home.scss"
 const Home = () => {
   return (
     <div className="home">
-      <Stories/>
-      <Share/>
-      <Posts/>
+      <Stories userId={1} />
+      <Share userId={1} />
+      <Posts userId={1} />
     </div>
   )
 }
