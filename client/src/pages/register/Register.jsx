@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./register.scss";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
 
 const Register = () => {
   const [inputs, setInputs] = useState({
@@ -20,7 +21,12 @@ const Register = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:8800/api/auth/register", inputs);
+      const res = await axios.post("http://localhost:8800/api/auth/register", inputs);
+      if (res.data.code === 200) {
+        toast("注册成功，请使用注册的用户名登录");
+      } else if (res.data.code === 409) {
+        toast("用户名已注册，请换一个用户名注册");
+      }
     } catch (err) {
       setErr(err);
     }
@@ -75,6 +81,7 @@ const Register = () => {
           </form>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };
